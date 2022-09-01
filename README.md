@@ -1,6 +1,6 @@
 # Valiantilities
 
-Formerly Chad Bot
+Formerly [Chad Bot](https://github.com/ValiantWind/Chad-Bot)
 
 (Switched Repositories due to the Original One Being Corrupted)
 
