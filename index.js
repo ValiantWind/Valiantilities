@@ -3,12 +3,9 @@ require('dotenv/config');
 const fs = require('fs');
 const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
 const { REST } = require("@discordjs/rest");
-const { Routes } = require("discord-api-types/v9");
-const fetch = require('node-fetch');
+const { Routes } = require("discord-api-types/v10");
 const token = process.env.token
 const clientId = process.env.clientId
-const guildId = process.env.guildId
-const configdb = require('quick.db');
 
 const client = new Client({
 	intents: [
@@ -41,8 +38,6 @@ client.commands = new Collection();
 client.categories = new Collection();
 client.usages = new Collection();
 client.cooldowns = new Collection();
-client.userPerms = new Collection();
-client.buttonCommands = new Collection();
 
 // const { GiveawaysManager } = require("discord-giveaways");
 // client.giveawaysManager = new GiveawaysManager(client, {
@@ -72,7 +67,7 @@ for (const module of commands) {
 
 	for (const commandFile of commandFiles) {
 		const command = require(`./interactions/commands/${module}/${commandFile}`);
-		client.commands.set(command.data.name, command)
+		client.commands.set(command.name, command)
 	}
 }
 
@@ -91,7 +86,7 @@ for (const file of eventFiles) {
 
 
 
-const rest = new REST({ version: "9" }).setToken(token);
+const rest = new REST({ version: "10" }).setToken(token);
 
 const commandJsonData = [
 	...Array.from(client.commands.values()).map((c) => c.data.toJSON()),
@@ -113,15 +108,15 @@ const commandJsonData = [
 	}
 })();
 
-const express = require('express')
-const app = express();
-const port = 3000
+// const express = require('express')
+// const app = express();
+// const port = 3000
  
-app.get('/', (req, res) => res.send('The Bot is Online.'))
+// app.get('/', (req, res) => res.send('The Bot is Online.'))
  
-app.listen(port, () =>
-console.log(`Your app is listening a http://localhost:${port}`)
-);
+// app.listen(port, () =>
+// console.log(`Your app is listening a http://localhost:${port}`)
+// );
     
 client.login(token);
 
