@@ -1,18 +1,13 @@
-# Valiantilities
+# Chad Bot
 
-Formerly [Chad Bot](https://github.com/ValiantWind/Chad-Bot)
+A Multipurpose Discord Bot coded with Discord.js with various different commands.
 
-(Switched Repositories due to the Original One Being Corrupted)
-
-Named after [The Valiant Hero](https://henrystickmin.fandom.com/wiki/Valiant_Hero) from the Henry Stickman Series
-
-(Switched Repositories due to the Original One Being Corrupted)
-
-Open source as of 7/15/2022  (Dated from the Old Repostiory)
+Open source as of 7/15/2022
 
 Features:
 - Uses Slash Commands
 - A Full Moderation System
+- A Complete Giveaway System
 - Lots of Fun Commands
 - Lots of Informational Commands
 - Some Roblox Commmands
@@ -42,7 +37,8 @@ A few things to note:
 1. Fork this repository
 2. Add a Command to any category you like using the following template:
 ```javascript
-const { InteractionType, SlashCommandBuilder } = require('discord.js')
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { InteractionType } = require('discord.js')
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -63,6 +59,7 @@ if(interaction.type != InteractionType.ApplicationCommand) return;
 }
 ```
 3. Create a Pull Request
+The command format I use is @discordjs/builders.
 
 Learn about it [here](https://github.com/discordjs/discord.js/tree/main/packages/builders)
 

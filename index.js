@@ -1,11 +1,14 @@
 require('dotenv/config');
 
 const fs = require('fs');
-const { Client, Collection, GatewayIntentBits, Partials, ActivityType } = require('discord.js');
-// const { REST } = require("@discordjs/rest");
-// const { Routes } = require("discord-api-types/v9");
+const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
+const { REST } = require("@discordjs/rest");
+const { Routes } = require("discord-api-types/v9");
+const fetch = require('node-fetch');
 const token = process.env.token
 const clientId = process.env.clientId
+const guildId = process.env.guildId
+const configdb = require('quick.db');
 
 const client = new Client({
 	intents: [
@@ -39,25 +42,7 @@ client.categories = new Collection();
 client.usages = new Collection();
 client.cooldowns = new Collection();
 client.userPerms = new Collection();
-
-const express = require('express')
-const app = express();
-
-app.all(`/`, (req, res) => {
-    res.send(`The Bot is Online`);
-});
-
-function keepAlive() {
-    app.listen(4000, () => {
-        console.log(`The Server is now ready! | ` + Date.now());
-    });
-}
- 
-// app.get('/', (req, res) => res.send('The Bot is Online.'))
- 
-// app.listen(port, () =>
-// console.log(`Your app is listening a http://localhost:${port}`)
-// );
+client.buttonCommands = new Collection();
 
 // const { GiveawaysManager } = require("discord-giveaways");
 // client.giveawaysManager = new GiveawaysManager(client, {
@@ -106,55 +91,48 @@ for (const file of eventFiles) {
 
 
 
-// const rest = new REST({ version: "10" }).setToken(token);
+const rest = new REST({ version: "9" }).setToken(token);
 
-// const commandJsonData = [
-// 	...Array.from(client.commands.values()).map((c) => c.data.toJSON()),
-// ];
+const commandJsonData = [
+	...Array.from(client.commands.values()).map((c) => c.data.toJSON()),
+];
 
-// (async () => {
-// 	try {
-// 		console.log("Started refreshing application (/) commands.");
+(async () => {
+	try {
+		console.log("Started refreshing application (/) commands.");
 
-// 		await rest.put(
+		await rest.put(
 
-// 			Routes.applicationCommands(clientId),
-// 			{ body: commandJsonData }
-// 		);
+			Routes.applicationCommands(clientId),
+			{ body: commandJsonData }
+		);
 
-// 		console.log("Successfully reloaded application (/) commands.");
-// 	} catch (error) {
-// 		console.error(error);
-// 	}
-// })();
+		console.log("Successfully reloaded application (/) commands.");
+	} catch (error) {
+		console.error(error);
+	}
+})();
 
-client.on('ready', () => {
-  client.user.setActivity('with other Chads', { type: ActivityType. Playing});
-})
-
-client.on('debug', console.debug)
-client.on('error', (e) => console.error(e));
-client.on('warning', (e) => console.warn(e));
-
-client.on('shardError', error => {
-	console.error('A websocket connection encountered an error:', error);
-});
+const express = require('express')
+const app = express();
+const port = 3000
+ 
+app.get('/', (req, res) => res.send('The Bot is Online.'))
+ 
+app.listen(port, () =>
+console.log(`Your app is listening a http://localhost:${port}`)
+);
     
 client.login(token);
-keepAlive();
 
 
-process.on('unhandledRejection', (reason, promise) => {
-	console.error('Unhandled promise rejection:', reason, promise);
-});
-process.on('warning', (warning) => {
-  console.warn(warning.name);    
-  console.warn(warning.message);   console.warn(warning.stack);  
+process.on('unhandledRejection', error => {
+	console.error('Unhandled promise rejection:', error);
 });
 
 process.on('uncaughtException', (err, origin) => {
   console.log(`Uncaught Exception: `, err, origin);
-})
+  })
 process.on('uncaughtExceptionMonitor', (err, origin) => {
   console.log('Uncaught Exception Monitor', err, origin);
-})
+  })
