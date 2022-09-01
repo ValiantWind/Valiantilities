@@ -1,4 +1,4 @@
-require('dotenv/config');
+require('dotenv').config;
 
 const fs = require('fs');
 const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
@@ -38,23 +38,6 @@ client.commands = new Collection();
 client.categories = new Collection();
 client.usages = new Collection();
 client.cooldowns = new Collection();
-
-// const { GiveawaysManager } = require("discord-giveaways");
-// client.giveawaysManager = new GiveawaysManager(client, {
-//   storage: "./utils/giveaways.json",
-//   default: {
-//     botsCanWin: false,
-//     embedColor: "BLURPLE",
-//     reaction: "🎉",
-//     lastChance: {
-//       enabled: true,
-//       content: `**Last chance to enter the giveaway!**`,
-//       threshold: 5000,
-//       embedColor: 'BLURPLE'
-//     }
-//   }
-// });
-
 
 ///////////////Slash Commands///////////////////
 
@@ -108,15 +91,15 @@ const commandJsonData = [
 	}
 })();
 
-// const express = require('express')
-// const app = express();
-// const port = 3000
+const express = require('express')
+const app = express();
+const port = 3000
  
-// app.get('/', (req, res) => res.send('The Bot is Online.'))
+app.get('/', (req, res) => res.send('The Bot is Online.'))
  
-// app.listen(port, () =>
-// console.log(`Your app is listening a http://localhost:${port}`)
-// );
+app.listen(port, () =>
+console.log(`Your app is listening a http://localhost:${port}`)
+);
     
 client.login(token);
 
