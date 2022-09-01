@@ -1,15 +1,23 @@
 {
-  "name": "nodejs",
+  "name": "Valiantilities",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ValiantWind",
+  "license": "Mozilla Public License 2.0",
   "dependencies": {
-    "node-fetch": "^3.2.6"
-  }
+    "node-fetch": "^2.6.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValiantWind/Valiantilities.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ValiantWind/Valiantilities/issues"
+  },
+  "homepage": "https://github.com/ValiantWind/Valiantilities#readme",
+  "description": ""
 }
