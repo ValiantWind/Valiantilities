@@ -22,6 +22,7 @@ module.exports = {
 if(interaction.type != InteractionType.ApplicationCommand) return;
     
     const options = interaction.options;
+		const reason = interaction.options.getString("reason") || 'No reason specified.';
 
       const target = options.get('userid')?.value;
 
@@ -31,7 +32,7 @@ if(interaction.type != InteractionType.ApplicationCommand) return;
       await interaction.guild.bans.remove(target);
       const embed = new EmbedBuilder()
       .setColor('BLURPLE')
-      .setDescription(` Successfully unbanned <@${target}>.`)
+      .setDescription(` Successfully unbanned <@${target}> || `)
       await interaction.reply({embeds: [embed]})
     } else {
       interaction.reply({content: "This person isn't banned dumbo."})

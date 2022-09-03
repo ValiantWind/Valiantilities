@@ -7,6 +7,10 @@ const { Routes } = require("discord-api-types/v10");
 const token = process.env.token
 const clientId = process.env.clientId
 
+const { spawn } = require('child_process');
+
+const child = spawn('pwd');
+
 const client = new Client({
 	intents: [
   GatewayIntentBits.Guilds,
@@ -17,9 +21,7 @@ const client = new Client({
   GatewayIntentBits.GuildPresences,
   GatewayIntentBits.GuildMessages,
   GatewayIntentBits.GuildMessageReactions,
-  GatewayIntentBits.GuildMessageTyping,
   GatewayIntentBits.DirectMessages,
-  GatewayIntentBits.MessageContent
   ],
   partials: [
     Partials.User,
@@ -39,6 +41,16 @@ client.categories = new Collection();
 client.usages = new Collection();
 client.cooldowns = new Collection();
 
+const express = require('express')
+const app = express();
+const port = 3000
+ 
+app.get('/', (req, res) => res.send('The Bot is Online.'))
+ 
+app.listen(port, () =>
+console.log(`Your app is listening a http://localhost:${port}`)
+);
+
 ///////////////Slash Commands///////////////////
 
 const commands = fs.readdirSync('./interactions/commands')
@@ -50,7 +62,7 @@ for (const module of commands) {
 
 	for (const commandFile of commandFiles) {
 		const command = require(`./interactions/commands/${module}/${commandFile}`);
-		client.commands.set(command.name, command)
+		client.commands.set(command.data.name, command)
 	}
 }
 
@@ -69,37 +81,29 @@ for (const file of eventFiles) {
 
 
 
-const rest = new REST({ version: "10" }).setToken(token);
+// const rest = new REST({ version: "10" }).setToken(token);
 
-const commandJsonData = [
-	...Array.from(client.commands.values()).map((c) => c.data.toJSON()),
-];
+// const commandJsonData = [
+// 	...Array.from(client.commands.values()).map((c) => c.data.toJSON()),
+// ];
 
-(async () => {
-	try {
-		console.log("Started refreshing application (/) commands.");
+// (async () => {
+// 	try {
+// 		console.log("Started refreshing application (/) commands.");
 
-		await rest.put(
+// 		await rest.put(
 
-			Routes.applicationCommands(clientId),
-			{ body: commandJsonData }
-		);
+// 			Routes.applicationCommands(clientId),
+// 			{ body: commandJsonData }
+// 		);
 
-		console.log("Successfully reloaded application (/) commands.");
-	} catch (error) {
-		console.error(error);
-	}
-})();
+// 		console.log("Successfully reloaded application (/) commands.");
+// 	} catch (error) {
+// 		console.error(error);
+// 	}
+// })();
 
-const express = require('express')
-const app = express();
-const port = 3000
- 
-app.get('/', (req, res) => res.send('The Bot is Online.'))
- 
-app.listen(port, () =>
-console.log(`Your app is listening a http://localhost:${port}`)
-);
+client.on('debug', console.log);
     
 client.login(token);
 

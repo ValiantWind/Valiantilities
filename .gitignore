@@ -3,6 +3,5 @@
 node_modules/
 /package-lock.json
 /json.sqlite
-Archive/
-utils/giveaways.json
 /.breakpoints
+/package.json

@@ -24,7 +24,7 @@ module.exports = {
      if(interaction.type != InteractionType.ApplicationCommand) return;
     
     const member = interaction.options.getMember('user');
-    const reason = interaction.options.getString('reason');
+    const reason = interaction.options.getString('reason') || 'No reason specified.';
 
 
     

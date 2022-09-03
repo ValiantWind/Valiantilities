@@ -14,14 +14,14 @@ module.exports = {
       .setDescription(`The user that you want to mute.`)
       .setRequired(true)
     )
+		  .addStringOption((option) => option
+      .setName('duration')
+      .setDescription(`The amount of minutes that you want the user to stay muted. (Eg: 1m, 30m, 50m)`)
+      .setRequired(true)
+    )
     .addStringOption((option) => option
       .setName('reason')
       .setDescription(`The reason you're muting this user for.`)
-      .setRequired(true)
-    )
-   .addStringOption((option) => option
-      .setName('duration')
-      .setDescription(`The amount of minutes that you want the user to stay muted. (Eg: 1m, 30m, 50m)`)
       .setRequired(true)
     )
   .setDefaultMemberPermissions(PermissionFlagsBits.KickMembers),
@@ -34,7 +34,7 @@ module.exports = {
     
     const member = interaction.options.getMember('user');
     const duration = interaction.options.getString('duration');
-    const reason = interaction.options.getString('reason') || 'No reason provided.'
+    const reason = interaction.options.getString('reason') || 'No reason specified.'
 
     const parsedTime = parseTime(duration);
     
