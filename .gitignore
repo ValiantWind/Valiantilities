@@ -1,6 +1,5 @@
 /.replit
 /replit.nix
-node_modules/
 /package-lock.json
 /json.sqlite
 /.breakpoints
