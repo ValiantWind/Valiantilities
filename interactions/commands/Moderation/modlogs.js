@@ -133,6 +133,8 @@ module.exports = {
         }).join("\n\n");
 
         let collector = interaction.channel.createMessageComponentCollector({ filter, time: 60000 });
+			console.log(warnField)
+			console.log(muteField)
 
         collector.on('collect', async (i) => {
             let cat = i.values.join('')
@@ -158,6 +160,8 @@ module.exports = {
               .addFields({ name: `Bans`, value: banField || 'No bans.' })] })
             }
         });
+			console.log(warnField)
+			console.log(muteField)
      interaction.reply({ components: [row] })
   
     }

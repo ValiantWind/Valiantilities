@@ -3,3 +3,4 @@
 /package-lock.json
 /json.sqlite
 /.breakpoints
+node_modules/
