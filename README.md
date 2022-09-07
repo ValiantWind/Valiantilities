@@ -35,40 +35,6 @@ A few things to note:
 
 - You might notice occasionally that the bot appearing offline and online and offline. Its because I'm restarting the bot to test new commands or apply changes.
 
-## Contributing
-- Currently I'm working on this bot alone, but if you have commands that you would like to add to the bot, then follow the steps below:
-
-1. Fork this repository
-2. Add a Command to any category you like using the following template:
-```javascript
-const { SlashCommandBuilder } = require('@discordjs/builders');
-const { InteractionType } = require('discord.js')
-
-module.exports = {
-  data: new SlashCommandBuilder()
-    .setName('COMMAND_NAME_HERE')
-    .setDescription(`COMMAND_DESCRIPTION`)
-    
-    <Add needed options here>
-    
-  cooldown: 5000,
-  category: 'CATEGORY NAME',
-  usage: '/command_name <arg>',
-  async execute(interaction) {
-
-if(interaction.type != InteractionType.ApplicationCommand) return;
-    
-
-  }
-}
-```
-3. Create a Pull Request
-The command format I use is @discordjs/builders.
-
-Learn about it [here](https://github.com/discordjs/discord.js/tree/main/packages/builders)
-
-I hope lots of people find use of this bot. Have a good day :D
-
 ### License
 
 This repo is registered under the Mozilla Public License 2.0.
