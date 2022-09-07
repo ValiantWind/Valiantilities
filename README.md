@@ -1,4 +1,8 @@
-# Chad Bot
+# Valiant Utilities
+
+## This Bot has unfortunately has reached it's end of service due to me running out of money to host it :(
+
+(Formerly Chad Bot)
 
 A Multipurpose Discord Bot coded with Discord.js with various different commands.
 
@@ -7,7 +11,6 @@ Open source as of 7/15/2022
 Features:
 - Uses Slash Commands
 - A Full Moderation System
-- A Complete Giveaway System
 - Lots of Fun Commands
 - Lots of Informational Commands
 - Some Roblox Commmands
