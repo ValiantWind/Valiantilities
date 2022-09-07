@@ -9,8 +9,6 @@ const clientId = process.env.clientId
 
 const { spawn } = require('child_process');
 
-const child = spawn('pwd');
-
 const client = new Client({
 	intents: [
   GatewayIntentBits.Guilds,
