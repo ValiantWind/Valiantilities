@@ -1,7 +1,5 @@
 # Valiant Utilities
 
-## This Bot has unfortunately has reached it's end of service due to me running out of money to host it :(
-
 (Formerly [Chad Bot](https://github.com/ValiantWind/Chad-Bot))
 (Move repositories due to the [previous one](https://github.com/ValiantWind/Chad-Bot being corrupted.)
 
