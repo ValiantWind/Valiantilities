@@ -1,5 +1,6 @@
 const { InteractionType, PermissionFlagsBits, ChannelType, SlashCommandBuilder } = require('discord.js');
 const parse = require('parse-duration');
+const ms = require('ms');
 
 module.exports = {
   data: new SlashCommandBuilder()
@@ -25,7 +26,7 @@ module.exports = {
     const amount = interaction.options.getString('time') || 0;
     const channelToSlowDown = interaction.options.getChannel('channel');
 
-    const duration = parse(amount)
+    const duration = ms(amount);
 
   
     if(isNaN(duration)){

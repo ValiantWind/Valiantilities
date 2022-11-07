@@ -30,11 +30,11 @@ module.exports = {
       return interaction.reply({ content: `You can't modify the roles of someone who has a higher rank than yours. You can't give yourself roles that are higher than yours either.`, ephemeral: true });
     }
     if (user.roles.cache.some(role => role.name === roleToAdd)) {
-	return interaction.reply({ content: `You already have that role!`, ephemeral: true });
+	return interaction.reply({ content: `That user already has that role!`, ephemeral: true });
 }
    
       user.roles.add(roleToAdd);
-    await interaction.reply('Role Added!')
+    await interaction.reply('Role Added!');
   }
 }
   

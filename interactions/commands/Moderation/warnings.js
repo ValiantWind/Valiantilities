@@ -18,18 +18,18 @@ module.exports = {
   usage: '/warnings <member>',
   async execute(interaction) {
 
-  if(interaction.type != InteractionType.ApplicationCommand) return;
     if (!interaction.isChatInputCommand()) return;
     
     
     const user = interaction.options.getMember('target');
 
-    const userWarnings = await warndb.find({
+		try {
+			 const userWarnings = await warndb.find({
       userId: user.id,
       guildId: interaction.guildId
     })
     
-    if(!userWarnings?.length) return interaction.reply({content: `${user} has no warnings in this server.`})
+    if(!userWarnings?.length) return interaction.reply({content: `${user} has no warnings in this server.`});
 
     const embedDescription = userWarnings.map((warn) => {
       const moderator = interaction.guild.members.cache.get(warn.moderatorId);
@@ -49,6 +49,9 @@ module.exports = {
       .setDescription(embedDescription)
       .setColor('BLURPLE')
 
-    interaction.reply({embeds: [embed]})
+   await interaction.reply({embeds: [embed]})
+		} catch(e){
+			console.log(e);
+		}
 }
 }

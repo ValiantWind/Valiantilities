@@ -12,6 +12,6 @@ module.exports = {
      if(interaction.type != InteractionType.ApplicationCommand) return;
     if (!interaction.isChatInputCommand()) return;
     
-		return interaction.reply('https://valiantwind.me/puppy');
+		return interaction.reply('https://ValiantWind.github.io/puppy');
 	},
 };

@@ -26,15 +26,13 @@ module.exports = {
   category: 'Moderation',
   usage: '/modlogs <member>',
   async execute(interaction) {
-    if(interaction.type != InteractionType.ApplicationCommand) return;
     if (!interaction.isChatInputCommand()) return;
     
     const options = interaction.options;
 
       const target = options.get('userid')?.value;
 
-    if(!target){
-      const userId = interaction.user.id;
+      const userId = target;
       const userWarnings = await warndb.find({      
       userId: userId,
       guildId: interaction.guildId
@@ -54,7 +52,7 @@ module.exports = {
       //userId: user.id,
       guildId: interaction.guildId
     })
-    if(!userWarnings?.length && !userMutes?.length && !userKicks?.length && !userBans?.length) return interaction.reply({content: `${interaction.user.tag} has no infractions in this server.`});
+    if(!userWarnings?.length && !userMutes?.length && !userKicks?.length && !userBans?.length) return interaction.reply({content: `This member has no infractions in this server.`});
     
 
     const row = new ActionRowBuilder()
@@ -86,7 +84,7 @@ module.exports = {
           )
       )
 
-      const filter = (int) => int.customId === 'select' && int.user.id === interaction.user.id;
+      const filter = (int) => int.customId === 'select' && int.user.id === userId;
 
     const warnField = userWarnings.map((warn) => {
       const warnModerator = interaction.guild.members.cache.get(warn.moderatorId);
@@ -133,8 +131,7 @@ module.exports = {
         }).join("\n\n");
 
         let collector = interaction.channel.createMessageComponentCollector({ filter, time: 60000 });
-			console.log(warnField)
-			console.log(muteField)
+
 
         collector.on('collect', async (i) => {
             let cat = i.values.join('')
@@ -160,10 +157,7 @@ module.exports = {
               .addFields({ name: `Bans`, value: banField || 'No bans.' })] })
             }
         });
-			console.log(warnField)
-			console.log(muteField)
-     interaction.reply({ components: [row] })
+     await interaction.reply({ components: [row] })
   
-    }
   }
 }

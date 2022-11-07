@@ -1,7 +1,7 @@
 require('dotenv').config;
 
 const fs = require('fs');
-const { Client, Collection, GatewayIntentBits, Partials, REST } = require('discord.js');
+const { Client, Collection, GatewayIntentBits, Partials, REST, Events } = require('discord.js');
 const { Routes } = require("discord-api-types/v10");
 const token = process.env.token
 const clientId = process.env.clientId
@@ -50,6 +50,28 @@ for (const module of commands) {
 		client.commands.set(command.data.name, command)
 	}
 }
+
+client.on(Events.InteractionCreate, async interaction => {
+	if (!interaction.isChatInputCommand()) return;
+
+	const command = interaction.client.commands.get(interaction.commandName);
+
+	if (!command) {
+		console.error(`No command matching ${interaction.commandName} was found.`);
+		return;
+	}
+
+	try {
+		  const t = client.cooldowns.get(`${interaction.user.id}_${command.name}`) || 0;
+     if (Date.now() - t < 0) return interaction.reply({ content: `You are on a cooldown of ${ms(t - Date.now(), { till: 'second' })}`, ephemeral: true });
+
+        client.cooldowns.set(`${interaction.user.id}_${command.name}`, Date.now() + (command.cooldown || 0));
+		await command.execute(interaction, client);
+	} catch (error) {
+		console.error(error);
+		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	}
+});
 
 const eventFiles = fs
 	.readdirSync("./events")
