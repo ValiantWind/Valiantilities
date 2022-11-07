@@ -1,12 +1,10 @@
 require('dotenv').config;
 
 const fs = require('fs');
-const { Client, Collection, GatewayIntentBits, Partials } = require('discord.js');
-const { REST } = require("@discordjs/rest");
+const { Client, Collection, GatewayIntentBits, Partials, REST } = require('discord.js');
 const { Routes } = require("discord-api-types/v10");
 const token = process.env.token
 const clientId = process.env.clientId
-const guildId = process.env.guildId
 
 const client = new Client({
 	intents: [

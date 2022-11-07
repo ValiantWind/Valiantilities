@@ -1,8 +1,6 @@
- const { EmbedBuilder, InteractionType, ButtonBuilder, ActionRowBuilder } = require('discord.js');
+ const { EmbedBuilder, InteractionType, ButtonBuilder, ActionRowBuilder, SlashCommandBuilder } = require('discord.js');
 const noblox = require('noblox.js');
 const fetch = require('node-fetch');
-
-const { SlashCommandBuilder } = require('@discordjs/builders');
 
 module.exports = {
   data: new SlashCommandBuilder()
