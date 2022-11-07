@@ -6,8 +6,7 @@ const { REST } = require("@discordjs/rest");
 const { Routes } = require("discord-api-types/v10");
 const token = process.env.token
 const clientId = process.env.clientId
-
-const { spawn } = require('child_process');
+const guildId = process.env.guildId
 
 const client = new Client({
 	intents: [
@@ -38,16 +37,6 @@ client.commands = new Collection();
 client.categories = new Collection();
 client.usages = new Collection();
 client.cooldowns = new Collection();
-
-// const express = require('express')
-// const app = express();
-// const port = 3000
- 
-// app.get('/', (req, res) => res.send('The Bot is Online.'))
- 
-// app.listen(port, () =>
-// console.log(`Your app is listening a http://localhost:${port}`)
-// );
 
 ///////////////Slash Commands///////////////////
 
@@ -91,7 +80,7 @@ for (const file of eventFiles) {
 
 // 		await rest.put(
 
-// 			Routes.applicationCommands(clientId),
+// 			Routes.applicationGuildCommands(clientId, guildId),
 // 			{ body: commandJsonData }
 // 		);
 
@@ -101,7 +90,7 @@ for (const file of eventFiles) {
 // 	}
 // })();
 
-client.on('debug', console.log);
+// client.on('debug', console.log);
     
 client.login(token);
 
